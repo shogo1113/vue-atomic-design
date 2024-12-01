@@ -21,8 +21,8 @@ const filteredTodos = computed(() => {
 </script>
 
 <template>
-  <div class="space-y-4">
-    <div class="flex gap-2">
+  <div class="space-y-6">
+    <nav class="flex flex-wrap gap-2" aria-label="タスクフィルター">
       <BaseButton
         :variant="filter === 'all' ? 'primary' : 'secondary'"
         @click="todoStore.setFilter('all')"
@@ -41,8 +41,8 @@ const filteredTodos = computed(() => {
       >
         完了済み
       </BaseButton>
-    </div>
-    <div class="border rounded-lg divide-y">
+    </nav>
+    <div class="material-card divide-y divide-gray-200 dark:divide-gray-700">
       <TodoItem
         v-for="todo in filteredTodos"
         :key="todo.id"
@@ -50,6 +50,13 @@ const filteredTodos = computed(() => {
         @toggle="todoStore.toggleTodo"
         @delete="todoStore.deleteTodo"
       />
+      <p 
+        v-if="filteredTodos.length === 0"
+        class="py-8 text-center text-gray-500 dark:text-gray-400"
+        role="status"
+      >
+        タスクがありません
+      </p>
     </div>
   </div>
 </template>

@@ -4,8 +4,8 @@ defineProps<{
   placeholder?: string
 }>()
 
-defineEmits<{
-  (e: 'update:modelValue', value: string): void
+const emit = defineEmits<{
+  'update:modelValue': [value: string]
 }>()
 </script>
 
@@ -13,8 +13,9 @@ defineEmits<{
   <input
     type="text"
     :value="modelValue"
-    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+    @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     :placeholder="placeholder"
-    class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500"
+    class="material-input"
+    aria-label="タスク入力"
   />
 </template>
